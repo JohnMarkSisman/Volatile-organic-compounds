@@ -2,6 +2,8 @@ require(ggplot2)
 require(dplyr)
 
 voc_process <- function(voc_data,axis_limit=5){
+  #axis_limit is the limit of the geom_col length to be plotted. Data above the limit will be denoted with a bar of this length accompanied by a label of the actual data value.
+  
   voc_data<-mutate(voc_data,text=ifelse(`Detected concentration`>axis_limit,`Detected concentration`,NA),Trace=ifelse(Trace==1,"T",NA))
   voc_data$Compound <- factor(voc_data$Compound, levels = rev(c("o-Cresol", "2-Methoxyphenol","m.p-Cresol","Creosol","4-Ethyl-2-methoxyphenol","Acenaphthylene","Acrolein","Acetronitrile","2-Furaldehyde","Salicylaldehyde","2,4-Dimethylphenol","Naphthalene","2-Methylnaphthalene","Biphenyl","Methylbiphenyl")))
   
